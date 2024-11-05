@@ -13,7 +13,7 @@ python -m venv bin
 ```
 6. Activar el entorno virtual: 
 ```bash
-bin/Scripts/activate
+.venv/Scripts/activate
 ```
 7. Instalar los paquetes: 
 ```bash
@@ -23,7 +23,7 @@ pip install -r requirements.txt
 ```bash
 python odoo-bin --conf=odoo.conf
 ```
-    Si es la primera vez que se iniciará odoo usar el comando: 
-    ```bash
-    python odoo-bin -i base --conf=odoo.conf
-    ```
+NOTA: Si es la primera vez que se iniciará odoo usar el comando: 
+```bash
+python odoo-bin -i base --conf=odoo.conf
+```
