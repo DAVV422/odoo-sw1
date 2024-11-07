@@ -7,9 +7,9 @@
             <form string="Gestión">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="date_start"/>
-                        <field name="date_end"/>
+                        <field name="nombre"/>
+                        <field name="fecha_inicio"/>
+                        <field name="fecha_fin"/>
                     </group>
                 </sheet>
             </form>
@@ -22,8 +22,9 @@
         <field name="type">list</field>  <!-- Cambiado de 'tree' a 'list' -->
         <field name="arch" type="xml">
             <list string="Gestión">
-                <field name="date_start"/>
-                <field name="date_end"/>
+                <field name="nombre"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
             </list>
         </field>
     </record>

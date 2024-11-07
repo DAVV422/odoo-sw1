@@ -8,10 +8,7 @@
                 <form string="Administrativo">
                     <sheet>
                         <group>
-                            <field name="name"/>
-                            <field name="position"/>
-                            <!-- <field name="email"/>
-                            <field name="phone"/> -->
+                            <field name="posicion"/>
                             <field name="user_id"/>
                         </group>
                     </sheet>
@@ -25,10 +22,8 @@
             <field name="type">list</field>  <!-- Cambiado de 'tree' a 'list' -->
             <field name="arch" type="xml">
                 <list string="Administrativo">
-                    <field name="name"/>
-                    <field name="position"/>
-                    <!-- <field name="email"/>
-                    <field name="phone"/> -->
+                    <field name="user_id" options="{'no_create': False, 'can_create': True}"/>
+                    <field name="posicion"/>
                 </list>
             </field>
         </record>

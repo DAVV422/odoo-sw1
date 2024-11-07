@@ -8,12 +8,17 @@
                 <form string="Tutor">
                     <sheet>
                         <group>
-                            <field name="name"/>
-                            <field name="relationship"/>
-                            <!-- <field name="phone"/>
-                            <field name="email"/> -->
                             <field name="user_id"/>
+                            <field name="parentesco"/>
                         </group>
+                        <group string="Alumnos a Cargo">
+                        <notebook>
+                            <page string="Alumnos">
+                                <field name="alumno_ids">
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
                     </sheet>
                 </form>
             </field>
@@ -22,13 +27,13 @@
         <record id="view_tutor_tree" model="ir.ui.view">
             <field name="name">tutor.list</field>
             <field name="model">colegio.tutor</field>
-            <field name="type">list</field>  <!-- Cambiado de 'tree' a 'list' -->
+            <field name="type">list</field>
             <field name="arch" type="xml">
                 <list string="Tutor">
-                    <field name="name"/>
-                    <field name="relationship"/>
-                    <!-- <field name="phone"/> -->
-                    <!-- <field name="email"/> -->
+                    <field name="user_id" options="{'no_create': False, 'can_create': True}"/>
+                    <field name="parentesco"/>
+                    <field name="alumno_ids" widget="one2many_tags"
+                   options="{'no_create': True, 'no_open': False}"/>
                 </list>
             </field>
         </record>
@@ -36,9 +41,7 @@
         <record id="action_tutor" model="ir.actions.act_window">
             <field name="name">Tutores</field>
             <field name="res_model">colegio.tutor</field>
-            <field name="view_mode">list,form</field>  <!-- Cambiado de 'tree' a 'list' -->
+            <field name="view_mode">list,form</field>
         </record>
-
-        <!-- <menuitem id="menu_tutor" name="Tutores" parent="menu_colegio" action="action_tutor"/> -->
     </data>
 </odoo>

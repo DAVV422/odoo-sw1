@@ -9,10 +9,11 @@
                 <form string="Notificación">
                     <sheet>
                         <group>
-                            <field name="title"/>
-                            <field name="message" widget="html"/>  <!-- Cambiado a texto enriquecido -->
-                            <field name="date"/>
+                            <field name="titulo"/>
+                            <field name="mensaje" widget="html"/>  <!-- Texto enriquecido -->
+                            <field name="fecha"/>
                             <field name="attachment_ids" widget="many2many_binary" context="{'create': True}" /> <!-- Campo de adjuntos -->
+                            <field name="creado_por" readonly="1"/>
                         </group>
                     </sheet>
                 </form>
@@ -26,8 +27,9 @@
             <field name="type">list</field>
             <field name="arch" type="xml">
                 <list string="Notificación">
-                    <field name="title"/>
-                    <field name="date"/>
+                    <field name="titulo"/>
+                    <field name="fecha"/>
+                    <field name="creado_por" readonly="1"/>
                     <field name="user_ids"/>
                 </list>
             </field>

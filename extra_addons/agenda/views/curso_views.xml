@@ -7,9 +7,8 @@
             <form string="Curso">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="level"/>
-                        <!-- <field name="section"/> -->
+                        <field name="nombre"/>
+                        <field name="nivel"/>
                     </group>
                 </sheet>
             </form>
@@ -22,8 +21,8 @@
         <field name="type">list</field>  <!-- Cambiado de 'tree' a 'list' -->
         <field name="arch" type="xml">
             <list string="Curso">
-                <field name="name"/>
-                <field name="level"/>
+                <field name="nombre"/>
+                <field name="nivel"/>
                 <!-- <field name="section"/> -->
             </list>
         </field>
