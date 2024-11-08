@@ -13,6 +13,7 @@ class Notificacion(models.Model):
         widget='float_time',
         help='Seleccione la hora'
     )
+    tipo = fields.Char(default='comunicado')
     lugar = fields.Char(string='Lugar')
     fecha_cierre = fields.Date(string='Fecha Cierre')
     user_ids = fields.Many2many('res.users', string='Usuarios')
@@ -50,10 +51,10 @@ class Notificacion(models.Model):
         elif self.tipo_destinatario == 'profesores':
             users_to_notify = self.env['res.users'].search([('profesor', '=', True)])  # Suponiendo que hay un campo booleano en res.users para profesores
 
-        # elif self.tipo_destinatario == 'curso' and self.curso_id:
-        #     alumnos = self.curso_id.alumno_ids
-        #     tutores = alumnos.mapped('tutor_id')
-        #     users_to_notify = tutores.user_id | alumnos.user_id
+        elif self.tipo_destinatario == 'curso' and self.curso_id:
+            alumnos = self.curso_id.alumno_ids
+            tutores = alumnos.mapped('tutor_id')
+            users_to_notify = tutores.user_id | alumnos.user_id
 
         elif self.tipo_destinatario == 'especifico' and self.user_ids:
             users_to_notify = self.user_ids
@@ -63,12 +64,22 @@ class Notificacion(models.Model):
                 'notificacion_id': self.id,
                 'user_id': user.id,
             })
+            
+    def action_view_lecturas(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Lecturas de Notificación',
+            'res_model': 'colegio.lectura',
+            'view_mode': 'list,form',
+            'domain': [('notificacion_id', '=', self.id)],
+            'context': {'default_notificacion_id': self.id},
+        }
 
 class Lectura(models.Model):
     _name = 'colegio.lectura'
     _description = 'Lectura de Notificaciones por Usuario'
-    _rec_name = 'read'
+    _rec_name = 'estado'
 
     notificacion_id = fields.Many2one('colegio.notificacion', string="Notificación", required=True)
     user_id = fields.Many2one('res.users', string="Usuario", required=True)
-    read = fields.Boolean("Leído", default=False)
+    estado = fields.Char("Estado", default='Enviado')

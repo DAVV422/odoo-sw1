@@ -10,7 +10,6 @@
     <menuitem id="menu_colegio_comunicados" name="Comunicados" parent="menu_colegio_root"/>
 
     <!-- Entradas del menú de Inscripción y Asignación -->
-    <menuitem id="menu_inscripciones" name="Inscripciones" parent="menu_colegio_administracion" action="action_inscripcion"/>
     <menuitem id="menu_asignaciones" name="Asignaciones" parent="menu_colegio_administracion" action="action_asignacion"/>
 
     <!-- Menús para otros modelos -->

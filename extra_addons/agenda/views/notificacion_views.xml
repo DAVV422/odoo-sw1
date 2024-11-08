@@ -41,6 +41,19 @@
                     <field name="fecha"/>
                     <field name="creado_por" readonly="1"/>
                     <field name="tipo_destinatario"/>
+                    <button name="action_view_lecturas" type="object" string="Ver Lecturas" class="oe_highlight"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_lectura_tree" model="ir.ui.view">
+            <field name="name">lectura.list</field>
+            <field name="model">colegio.lectura</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Lecturas de Notificación">
+                    <field name="user_id" string="Usuario"/>
+                    <field name="estado" string="Estado"/>
                 </list>
             </field>
         </record>
@@ -50,6 +63,15 @@
             <field name="name">Notificaciones</field>
             <field name="res_model">colegio.notificacion</field>
             <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Acción para mostrar las lecturas asociadas a una notificación -->
+        <record id="action_view_lecturas" model="ir.actions.act_window">
+            <field name="name">Lecturas de Notificación</field>
+            <field name="res_model">colegio.lectura</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('notificacion_id', '=', active_id)]</field>
+            <field name="context">{'default_notificacion_id': active_id}</field>
         </record>
     </data>
 </odoo>
