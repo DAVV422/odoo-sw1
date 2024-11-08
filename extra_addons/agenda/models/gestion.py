@@ -8,5 +8,4 @@ class Gestion(models.Model):
     nombre = fields.Char("Nombre de la Gestión", required=True)
     fecha_inicio = fields.Date('Fecha de Inicio', required=True)
     fecha_fin = fields.Date('Fecha Finalización')
-    inscripcion_ids = fields.One2many('colegio.inscripcion', 'gestion_id', string="Inscripciones")
     asignacion_ids = fields.One2many('colegio.asignacion', 'gestion_id', string="Asignaciones")
