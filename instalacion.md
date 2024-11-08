@@ -31,7 +31,7 @@ python odoo-bin -i base --conf=odoo.conf
 ```
 
 ## Entorno dockerizado
-## Inicialización del proyecto (Primera vez)
+### Inicialización del proyecto (Primera vez)
 
 1. Clona el repositorio de Git:
    ```
@@ -68,7 +68,7 @@ python odoo-bin -i base --conf=odoo.conf
 
 8. Accede a la interfaz web de Odoo en http://localhost:8069 y crea una nueva base de datos.
 
-## Ejecución recurrente del proyecto
+### Ejecución recurrente del proyecto
 
 1. Asegúrate de estar en la rama `sw1-agenda`:
    ```
