@@ -1,19 +1,19 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class Curso(models.Model):
     _name = 'colegio.curso'
     _description = 'Curso del Colegio'
-    _rec_name = 'nombre'
+    _rec_name = '_grado_name'
 
     nombre = fields.Char("Nombre del Curso", required=True)
     nivel = fields.Char("Nivel del Curso", required=True)
     alumno_ids = fields.Many2many('colegio.alumno', through='colegio.inscripcion', string="Alumnos")
     asignacion_ids = fields.One2many('colegio.asignacion', 'curso_id', string="Asignaciones")
     
-    #Función para mostrar el nombre y el nivel en el _rec_name
-    def name_get(self):
-        result = []
+    # Campo computado para concatenar nombre y nivel
+    _grado_name = fields.Char(compute='_compute_name', store=False)
+
+    @api.depends('nombre', 'nivel')
+    def _compute_name(self):
         for record in self:
-            name = f"{record.nombre} - {record.nivel}" if record.nivel else record.nombre
-            result.append((record.id, name))
-        return result
+            record._grado_name = f"{record.nombre} - {record.nivel}"
