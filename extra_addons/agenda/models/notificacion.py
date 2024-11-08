@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class Notificacion(models.Model):
     _name = 'colegio.notificacion'
@@ -26,10 +26,48 @@ class Notificacion(models.Model):
         default=lambda self: self.env.user, 
         readonly=True
     )
+    tipo_destinatario = fields.Selection([
+        ('todos', 'Todos'),
+        ('profesores', 'Profesores'),
+        ('curso', 'Curso'),
+        ('especifico', 'Específico')
+    ], string="Enviar a", required=True)
+    curso_id = fields.Many2one('colegio.curso', string="Curso", help="Seleccionar curso para enviar notificación", store=False)
+    
+    @api.model
+    def create(self, vals):
+        notificacion = super(Notificacion, self).create(vals)
+        notificacion.crear_lecturas()
+        return notificacion
+
+    def crear_lecturas(self):
+        # Lógica para generar registros en la tabla Lectura en base al tipo de destinatario seleccionado.
+        users_to_notify = []
+
+        if self.tipo_destinatario == 'todos':
+            users_to_notify = self.env['res.users'].search([])
+
+        elif self.tipo_destinatario == 'profesores':
+            users_to_notify = self.env['res.users'].search([('profesor', '=', True)])  # Suponiendo que hay un campo booleano en res.users para profesores
+
+        # elif self.tipo_destinatario == 'curso' and self.curso_id:
+        #     alumnos = self.curso_id.alumno_ids
+        #     tutores = alumnos.mapped('tutor_id')
+        #     users_to_notify = tutores.user_id | alumnos.user_id
+
+        elif self.tipo_destinatario == 'especifico' and self.user_ids:
+            users_to_notify = self.user_ids
+
+        for user in users_to_notify:
+            self.env['colegio.lectura'].create({
+                'notificacion_id': self.id,
+                'user_id': user.id,
+            })
 
 class Lectura(models.Model):
     _name = 'colegio.lectura'
     _description = 'Lectura de Notificaciones por Usuario'
+    _rec_name = 'read'
 
     notificacion_id = fields.Many2one('colegio.notificacion', string="Notificación", required=True)
     user_id = fields.Many2one('res.users', string="Usuario", required=True)

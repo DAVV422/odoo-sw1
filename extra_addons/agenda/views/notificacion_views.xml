@@ -14,6 +14,16 @@
                             <field name="fecha"/>
                             <field name="attachment_ids" widget="many2many_binary" context="{'create': True}" /> <!-- Campo de adjuntos -->
                             <field name="creado_por" readonly="1"/>
+                            <field name="tipo_destinatario" widget="radio"/>
+                            <div invisible="tipo_destinatario != 'curso'">
+                                <label for="curso_id">Seleccionar curso:</label>
+                                <field name="curso_id" string="Enviar a Curso" options="{'no_create': True}" domain="[('nivel', '=', 'Grado seleccionado')]" context="{'create': False}"/>
+                            </div>
+
+                            <div invisible="tipo_destinatario != 'especifico'">
+                                <label for="user_ids">Seleccionar usuarios:</label>
+                                <field name="user_ids" widget="many2many_tags"/>
+                            </div>
                         </group>
                     </sheet>
                 </form>
@@ -30,7 +40,7 @@
                     <field name="titulo"/>
                     <field name="fecha"/>
                     <field name="creado_por" readonly="1"/>
-                    <field name="user_ids"/>
+                    <field name="tipo_destinatario"/>
                 </list>
             </field>
         </record>

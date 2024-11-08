@@ -9,6 +9,6 @@ access_colegio_asignacion_admin,colegio.asignacion,model_colegio_asignacion,grou
 access_colegio_curso,colegio.curso,model_colegio_curso,base.group_user,1,0,0,0
 access_colegio_curso_admin,colegio.curso,model_colegio_curso,group_administrativo,1,1,1,1
 access_colegio_materia,colegio.materia,model_colegio_materia,group_administrativo,1,1,1,1
-access_colegio_inscripcion,colegio.inscripcion,model_colegio_inscripcion,group_administrativo,1,1,1,1
-access_colegio_notificacion,colegio.notificacion,model_colegio_notificacion,group_administrativo,1,1,1,1
+access_colegio_notificacion,colegio.notificacion,model_colegio_notificacion,group_administrativo,1,0,1,0
 access_colegio_gestion,colegio.gestion,model_colegio_gestion,group_administrativo,1,1,1,1
+access_colegio_lectura,colegio.lectura,model_colegio_lectura,base.group_user,1,1,1,0
