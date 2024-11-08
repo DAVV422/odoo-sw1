@@ -11,3 +11,15 @@ class Alumno(models.Model):
     grado = fields.Many2one('colegio.curso', string="Grado Actual")
     curso_ids = fields.Many2many('colegio.curso', through='colegio.inscripcion', string="Cursos")
     
+    @api.model
+    def create(self, vals):
+        # Crear el registro de profesor
+        alumno = super(Alumno, self).create(vals)
+        
+        # Asignar el grupo "Profesor" al usuario seleccionado
+        if alumno.user_id:
+            group_alumno = self.env.ref('agenda.group_alumno')
+            alumno.user_id.groups_id |= group_alumno
+        
+        return alumno
+    
