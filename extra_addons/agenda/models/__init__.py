@@ -3,7 +3,7 @@
 from . import tutor
 from . import alumno
 from . import curso
-from . import inscripcion
+# from . import inscripcion
 from . import materia
 from . import profesor
 from . import asignacion

@@ -19,7 +19,7 @@
         'views/profesor_views.xml',
         'views/administrativo_views.xml',
         'views/notificacion_views.xml',
-        'views/inscripcion_views.xml',
+        # 'views/inscripcion_views.xml',
         'views/asignacion_views.xml',
         'views/menu_views.xml',
     ],
