@@ -91,3 +91,30 @@ python odoo-bin -i base --conf=odoo.conf
    ```
 
 5. Accede a la interfaz web de Odoo en http://localhost:8069.
+
+
+### En cas de no poder crear la imagen de docker
+
+En caso de no poder crear la imagen de docker, ejecute las siguientes instrucciones:
+
+1. Limpia el ambiente Docker:
+```
+docker system prune -a
+```
+
+2. Reconstruye las imagenes
+```
+docker-compose build --no-cache
+```
+
+3. Levanta los servicios de Docker:
+   ```
+   docker-compose up -d
+   ```
+
+4. Verifica los logs para asegurarte que todo haya iniciado correctamente:
+   ```
+   docker-compose logs -f
+   ```
+
+5. Accede a la interfaz web de Odoo en http://localhost:8069.
