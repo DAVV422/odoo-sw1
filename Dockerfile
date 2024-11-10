@@ -1,5 +1,4 @@
-# Dockerfile
-FROM python:3.10-slim-buster
+FROM python:3.10-slim
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,14 +11,18 @@ RUN apt-get update && apt-get install -y \
     libsasl2-dev \
     libpq-dev \
     git \
+    libevent-dev \
+    python3-setuptools \
+    python3-pip \
+    python3-wheel \
+    python3-dev \
+    gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Create odoo user
-RUN useradd -ms /bin/bash odoo
-
-# Create necessary directories
-RUN mkdir -p /opt/odoo /var/lib/odoo /etc/odoo
-RUN chown odoo:odoo /var/lib/odoo /etc/odoo
+# Create odoo user and necessary directories
+RUN useradd -ms /bin/bash odoo \
+    && mkdir -p /opt/odoo /var/lib/odoo /etc/odoo \
+    && chown -R odoo:odoo /var/lib/odoo /etc/odoo /opt/odoo
 
 # Set working directory
 WORKDIR /opt/odoo
@@ -27,12 +30,20 @@ WORKDIR /opt/odoo
 # Copy repository contents
 COPY --chown=odoo:odoo . .
 
-# Copy configuration file
-COPY --chown=odoo:odoo odoo-example.conf /etc/odoo/odoo.conf
-
-# Install Python dependencies
+# Create and activate virtual environment
 RUN python -m venv /opt/odoo/venv
 ENV PATH="/opt/odoo/venv/bin:$PATH"
+
+# Upgrade pip and install wheel
+RUN pip install --upgrade pip setuptools wheel
+
+# Pre-install specific versions of problematic packages
+RUN pip install --no-cache-dir \
+    cython==0.29.32 \
+    greenlet==2.0.2 \
+    gevent==22.10.2
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set permissions
@@ -41,7 +52,7 @@ RUN chown -R odoo:odoo /opt/odoo
 # Switch to odoo user
 USER odoo
 
-# Expose Odoo port
+# Expose ports
 EXPOSE 8069
 
 # Set default command
