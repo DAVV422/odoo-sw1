@@ -17,7 +17,7 @@
                             <field name="tipo_destinatario" widget="radio"/>
                             <div invisible="tipo_destinatario != 'curso'">
                                 <label for="curso_id">Seleccionar curso:</label>
-                                <field name="curso_id" string="Enviar a Curso" options="{'no_create': True}" domain="[('nivel', '=', 'Grado seleccionado')]" context="{'create': False}"/>
+                                <field name="curso_id" string="Enviar a Curso" options="{'no_create': True}"  context="{'create': False}"/>
                             </div>
 
                             <div invisible="tipo_destinatario != 'especifico'">

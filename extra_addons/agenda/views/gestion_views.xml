@@ -35,5 +35,4 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- <menuitem id="menu_gestion" name="Gestión" parent="menu_colegio" action="action_gestion"/> -->
 </odoo>

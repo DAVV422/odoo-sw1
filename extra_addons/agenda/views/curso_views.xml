@@ -23,7 +23,6 @@
             <list string="Curso">
                 <field name="nombre"/>
                 <field name="nivel"/>
-                <!-- <field name="section"/> -->
             </list>
         </field>
     </record>
@@ -34,5 +33,4 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- <menuitem id="menu_curso" name="Cursos" parent="menu_colegio" action="action_curso"/> -->
 </odoo>

@@ -5,7 +5,7 @@ class Administrativo(models.Model):
     _description = 'Personal Administrativo del Colegio'
     _rec_name = 'user_id'
 
-    posicion = fields.Char("Cargo", required=True)
+    cargo = fields.Char("Cargo", required=True)
     user_id = fields.Many2one('res.users', string="Usuario", required=True)
     
     @api.model

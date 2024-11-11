@@ -33,7 +33,7 @@ class Notificacion(models.Model):
         ('curso', 'Curso'),
         ('especifico', 'Específico')
     ], string="Enviar a", required=True)
-    curso_id = fields.Many2one('colegio.curso', string="Curso", help="Seleccionar curso para enviar notificación", store=False)
+    curso_id = fields.Many2one('colegio.curso', string="Curso", help="Seleccionar curso para enviar notificación", store=True)
     
     @api.model
     def create(self, vals):
@@ -49,12 +49,13 @@ class Notificacion(models.Model):
             users_to_notify = self.env['res.users'].search([])
 
         elif self.tipo_destinatario == 'profesores':
-            users_to_notify = self.env['res.users'].search([('profesor', '=', True)])  # Suponiendo que hay un campo booleano en res.users para profesores
+            profesores = self.env['colegio.profesor'].search([])  # Buscamos todos los registros de colegio.profesor
+            users_to_notify = profesores.mapped('user_id') # Obtenemos el user_id de cada profesor
 
         elif self.tipo_destinatario == 'curso' and self.curso_id:
             alumnos = self.curso_id.alumno_ids
             tutores = alumnos.mapped('tutor_id')
-            users_to_notify = tutores.user_id | alumnos.user_id
+            users_to_notify = tutores.mapped('user_id') | alumnos.mapped('user_id')
 
         elif self.tipo_destinatario == 'especifico' and self.user_ids:
             users_to_notify = self.user_ids

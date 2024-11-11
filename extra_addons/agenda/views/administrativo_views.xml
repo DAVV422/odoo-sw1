@@ -8,7 +8,7 @@
                 <form string="Administrativo">
                     <sheet>
                         <group>
-                            <field name="posicion"/>
+                            <field name="cargo"/>
                             <field name="user_id"/>
                         </group>
                     </sheet>
@@ -23,7 +23,7 @@
             <field name="arch" type="xml">
                 <list string="Administrativo">
                     <field name="user_id" options="{'no_create': False, 'can_create': True}"/>
-                    <field name="posicion"/>
+                    <field name="cargo"/>
                 </list>
             </field>
         </record>
@@ -34,6 +34,5 @@
             <field name="view_mode">list,form</field>
         </record>
 
-        <!-- <menuitem id="menu_administrativo" name="Administrativos" parent="menu_colegio" action="action_administrativo"/> -->
     </data>
 </odoo>

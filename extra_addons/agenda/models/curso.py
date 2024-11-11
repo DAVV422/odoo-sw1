@@ -7,7 +7,7 @@ class Curso(models.Model):
 
     nombre = fields.Char("Nombre del Curso", required=True)
     nivel = fields.Char("Nivel del Curso", required=True)
-    alumno_ids = fields.Many2many('colegio.alumno', through='colegio.inscripcion', string="Alumnos")
+    alumno_ids = fields.One2many('colegio.alumno', 'grado', string="Alumnos")
     asignacion_ids = fields.One2many('colegio.asignacion', 'curso_id', string="Asignaciones")
     
     # Campo computado para concatenar nombre y nivel
