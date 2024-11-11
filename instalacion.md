@@ -118,3 +118,10 @@ docker-compose build --no-cache
    ```
 
 5. Accede a la interfaz web de Odoo en http://localhost:8069.
+
+
+
+res_users: datos del login
+res_partners: datos del usuario 
+ir_attachment: datos del los archivos adjuntos 
+m2m_colegio_notificacion_attachment: la tabla relación de la notificación con los archivos adjuntos
